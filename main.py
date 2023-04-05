@@ -12,7 +12,7 @@ def nitro_checker_message_length(message):
     if (len(message) > 2000) & (nitro == 'none' or 'basic'):
         print('Message too long! Max length for non nitro / nitro basic users is 2000 characters, you have', len(message), 'characters')
         sys.exit()
-    elif len(message) > 4000:
+    if len(message) > 4000:
         print('Message too long! Max length for Discord messages is 4000 characters, you have', len(message), 'characters')
         sys.exit()
 
