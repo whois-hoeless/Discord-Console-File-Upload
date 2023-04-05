@@ -19,6 +19,8 @@
 - if you have multiple friends with the same name, it could happen that only 1 friend gets the file, to fix that just remove the .lower() which makes the script case sensitive again
 - Then the script asks you if you want to send an additional message, just press enter to skip if you only want to send the file
 
+## Btw
+- I also added a bash script, so if you put both of those files inside of /usr/bin/ and allow it to execute, then you can have an universal command in linux :>
 ### If there are any questions or bugs, feel free to open a ticket.
 
 ## Enjoy!
