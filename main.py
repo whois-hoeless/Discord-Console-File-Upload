@@ -7,7 +7,16 @@ import os
 if len(sys.argv) != 2:
     print('You have no or too many arguments given! >:c')
     sys.exit()
-def nitro_checker(file_name):
+
+def nitro_checker_message_length(message):
+    if len(message) > 2000 & nitro == 'none' or 'basic':
+        print('Message too long! Max length for non nitro / nitro basic users is 2000 characters, you have', len(message), 'characters')
+        sys.exit()
+    elif len(message) > 4000:
+        print('Message too long! Max length for Discord messages is 4000 characters, you have', len(message), 'characters')
+        sys.exit()
+
+def nitro_checker_file_size(file_name):
     file_size = os.path.getsize(file_name)
     file_size = file_size / 1000000
     if nitro == 'nitro':
@@ -31,13 +40,15 @@ def nitro_checker(file_name):
 
 nitro = 'none' # default value = none: can be 'basic' for nitro basic or 'nitro' for normal nitro
 file_name = sys.argv[1]
-nitro_checker(file_name)
+nitro_checker_file_size(file_name)
 token = '' # your personal discord token
 friends = []
 friend = str(input('Type the name of a friend: ')) 
 friend = friend.lower().strip()
 message = str(input('Type a message (press enter for none): '))
+nitro_checker_message_length(message)
 found_friend = False
+
 header = {
     'authorization': token,
 }
