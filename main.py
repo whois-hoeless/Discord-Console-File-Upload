@@ -4,6 +4,13 @@ from urllib.request import Request, urlopen
 import sys
 import os 
 
+counter = 0
+friends = []
+nitro = 'none' # default value = none: can be 'basic' for nitro basic or 'nitro' for normal nitro
+token = '' # your personal discord token
+file_name = sys.argv[1]
+
+
 if len(sys.argv) != 2:
     print('You have no or too many arguments given! >:c')
     sys.exit()
@@ -30,36 +37,13 @@ def nitro_checker_file_size(file_name):
             print(f'File too big! Max size for basic nitro users is {max_size}MB, you have {file_size}MB')
             sys.exit()
     elif nitro == 'none':
-        max_size = 8
+        max_size = 25 # Discord changed the size from 8mb to 25mb
         if file_size > max_size:
             print(f'File too big! Max size for non nitro users is {max_size}MB, you have {file_size}MB')
             sys.exit()
     else:
         print('Nitro variable not set correctly! (can be "nitro", "basic" or "none"')
         sys.exit()
-
-nitro = 'none' # default value = none: can be 'basic' for nitro basic or 'nitro' for normal nitro
-file_name = sys.argv[1]
-nitro_checker_file_size(file_name)
-token = '' # your personal discord token
-friends = []
-friend = str(input('Type the name of a friend: ')) 
-friend = friend.lower().strip()
-message = str(input('Type a message (press enter for none): '))
-nitro_checker_message_length(message)
-found_friend = False
-
-header = {
-    'authorization': token,
-}
-
-files = {
-    "file" : (f"./{file_name}", open(f"./{file_name}", 'rb')) 
-}
-
-payload = {
-    "content": [message if message else '']
-}
 
     
 def get_headers(token=None, content_type='application/json'):
@@ -86,11 +70,33 @@ def get_friends(token):
 data = get_friends(token)
 
 for i in data:
-    f = i['user']['username'], i['id']
+    f = i['user']['username'], i['id'], counter
     friends.append(f)
+    counter += 1
+
+nitro_checker_file_size(file_name)
+for friend in friends:
+    print(str(friend[2])+'. ' + friend[0])
+friend = str(input('Type the number or name of a friend: ')) 
+friend = friend.lower().strip()
+message = str(input('Type a message (press enter for none): '))
+nitro_checker_message_length(message)
+found_friend = False
+
+header = {
+    'authorization': token,
+}
+
+files = {
+    "file" : (f"./{file_name}", open(f"./{file_name}", 'rb')) 
+}
+
+payload = {
+    "content": [message if message else '']
+}
 
 for i in friends:
-    if friend == i[0].lower().strip():
+    if friend == i[0].lower().strip() or str(friend) == str(i[2]):
         chat_id = get_chat(token, i[1])
         r = requests.post(f"https://discord.com/api/v9/channels/{chat_id}/messages", data=payload, headers=header, files=files)
         found_friend = True
@@ -98,5 +104,6 @@ for i in friends:
 
 if not found_friend:
     print('Friend not found')
-        
+else:
+    print('File sent!')
 
