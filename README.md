@@ -10,6 +10,19 @@
 - Enter your personal discord token into the token variable inside of the script
 - Select your nitro plan (I made the script check file sizes), valid options are 'none' for no nitro, 'basic' for nitro basic and 'nitro' for normal nitro users
 - You're good to go!
+# warning!!
+names are preffered over numbers that can bring up following issue for example:
+- you have a friends list of 25 friends
+- one of your friend's name is 13
+- you want to message the friend with the index 13
+- it will send the file to the friend whose name is 13 (name not index) because the script prioritizes names over indexes.
+- Fix:
+- write the friend's name whose index is 13
+- remove the friend with the number as their name from your friendslist: number as name == bad person (jk)
+- Also, just as a side note, if you ever found yourself using the "nickname" feature that discord provides, that also gets ignored by the script. Only the username is accepted.
+# experimental:
+- I have no experience with people having unicode or ascii characters as their name. The index should help with that but I don't know what the script outputs when it encounters ascii / unicode whatsoever. Probably dependent on your shell..
+
 
 ## Usage
 - python main.py <file_to_upload>
