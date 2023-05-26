@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import requests
 import json
 from urllib.request import Request, urlopen
@@ -7,9 +8,17 @@ import os
 counter = 0
 friends = []
 nitro = 'none' # default value = none: can be 'basic' for nitro basic or 'nitro' for normal nitro
-token = '' # your personal discord token
-file_name = sys.argv[1]
-
+token = 'TOKEN' # your personal discord token
+try:
+    file_name = sys.argv[1]
+    if os.path.exists(file_name):
+        print("You need to provide a file, not a directory")
+        sys.exit()
+    else:
+        print('LLL')
+except IndexError:
+    print("You didn't provide a file as the first argument")
+    sys.exit()
 
 if len(sys.argv) != 2:
     print('You have no or too many arguments given! >:c')
@@ -106,4 +115,3 @@ if not found_friend:
     print('Friend not found')
 else:
     print('File sent!')
-
