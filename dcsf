@@ -1,5 +1,0 @@
-#!/bin/bash
-
-input=$1
-
-python /usr/bin/dcsf.py $input
