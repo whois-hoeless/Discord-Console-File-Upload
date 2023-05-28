@@ -14,8 +14,7 @@ try:
     if os.path.exists(file_name):
         print("You need to provide a file, not a directory")
         sys.exit()
-    else:
-        print('LLL')
+
 except IndexError:
     print("You didn't provide a file as the first argument")
     sys.exit()
