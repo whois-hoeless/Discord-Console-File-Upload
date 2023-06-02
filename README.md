@@ -7,6 +7,12 @@
 - It was also a nice little challange for me since I hardly ever work with requests
 - Enough of my backstory, let's dive into the setup!
 
+## Installation
+
+- You can just get it from the AUR: dcsf-git: <https://aur.archlinux.org/packages/dcsf-git>
+- for example if you use yay: `yay -S dcsf-git`
+- If you don't use arch, you can just clone the repo, and copy the dcsf file into your /usr/bin folder. 
+
 ## Setup
 
 - The script asks you for your settings when needed. You should be able to figure out what to do.
