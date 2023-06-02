@@ -4,15 +4,74 @@ import json
 from urllib.request import Request, urlopen
 import sys
 import os 
+from dotenv import load_dotenv
+
+username = os.getlogin()
+if not os.path.isdir(f'/home/{username}/.config/dcsf/'):
+   os.makedirs(f'/home/{username}/.config/dcsf/')
+   print(f'Created config directory at /home/{username}/.config/dcsf/ to store your token and nitro plan.')
+
+load_dotenv(dotenv_path=f'/home/{username}/.config/dcsf/.env')
 
 counter = 0
 friends = []
-nitro = 'none' # default value = none: can be 'basic' for nitro basic or 'nitro' for normal nitro
-token = 'TOKEN' # your personal discord token
+nitro = os.getenv('NITRO_PLAN') # default value = none: can be 'basic' for nitro basic or 'nitro' for normal nitro
+token = os.getenv('DCSF_TOKEN') # your personal discord token
+
+def first_setup(fix=False):
+    global token
+    global nitro
+    if fix == True:
+        print('DCSF_TOKEN environment variable is not set correctly! Please set it to your Discord token.')
+        token = str(input('Discord Token: '))
+        with open(f'/home/{username}/.config/dcsf/.env', 'w') as f:
+            f.write(f'DCSF_TOKEN={token}\n')
+            f.write(f'NITRO_PLAN={nitro}')
+            f.close()
+        print('Fixing complete! You can now run the script again.')
+        sys.exit()
+
+    if token is None:
+        print('DCSF_TOKEN environment variable is not set! Please set it to your Discord token.')
+        token = str(input('Discord Token: '))
+
+    if nitro is None:
+        print('NITRO_PLAN environment variable is not set! Please set it to your Nitro plan.')
+        nitro = int(input(
+            """Nitro plan can be set to:
+            1) Nitro
+            2) Nitro Basic
+            3) none 
+            
+            Please Enter 1, 2 or 3: """))
+    
+    if nitro == 1:
+        nitro = 'nitro'
+    elif nitro == 2:
+        nitro = 'basic'
+    elif nitro == 3:
+        nitro = 'none'
+    
+    with open(f'/home/{username}/.config/dcsf/.env', 'w') as f:
+        f.write(f'DCSF_TOKEN={token}\n')
+        f.write(f'NITRO_PLAN={nitro}')
+        f.close()
+    
+    if nitro != None and token != None:
+        pass
+    else:
+        print('Setup complete! You can now run the script again.')
+        sys.exit()
+
+first_setup()
+
 try:
     file_name = sys.argv[1]
-    if os.path.exists(file_name):
-        print("You need to provide a file, not a directory")
+    if not os.path.exists(file_name):
+        print("this path doesn't exist")
+        sys.exit()
+    if os.path.isdir(file_name):
+        print("this is a directory, not a file")
         sys.exit()
 
 except IndexError:
@@ -76,11 +135,14 @@ def get_friends(token):
         pass
 
 data = get_friends(token)
-
-for i in data:
-    f = i['user']['username'], i['id'], counter
-    friends.append(f)
-    counter += 1
+try:
+    for i in data:
+        f = i['user']['username'], i['id'], counter
+        friends.append(f)
+        counter += 1
+except:
+    print("Your token is wrong or doesn't exist! Please check your token and try again.")
+    first_setup(True)
 
 nitro_checker_file_size(file_name)
 for friend in friends:

@@ -9,11 +9,8 @@
 
 ## Setup
 
-- Enter your personal discord token into the token variable inside of the script
-- Select your nitro plan (I made the script check file sizes), valid options are 'none' for no nitro, 'basic' for nitro basic and 'nitro' for normal nitro users
-- I recommend putting the script somewhere, where you don't delete it and then put a symbolic link to the script's location inside of /usr/local/bin so you can use it as a command
-- Otherwise you can just add the .py extension to the script and use it in your console like that or however you want :>
-- You're good to go!
+- The script asks you for your settings when needed. You should be able to figure out what to do.
+- If you don't know how to obtain your discord token, look into the "how do I get my discord token" section.
 
 ### Warning
 
@@ -31,19 +28,31 @@ names are preffered over numbers that can bring up following issue for example:
 ### Experimental
 
 - I have no experience with people having unicode or ascii characters as their name. The index should help with that but I don't know what the script outputs when it encounters ascii / unicode whatsoever. Probably dependent on your shell..
+- Also I don't know if there is a cap in the amount of friends that get returned in the list of friends when you make a request, I don't think so but I don't know for sure.
 
 ## Usage
 
-- python main.py <file_to_upload>
+- dcsf <file_to_upload>
 - you will get prompted with any file size errors (if you have any)
 - The script will ask you for a friends name, you don't need to provide the # because I wouldn't be able to remember those numbers
 - also, it isn't case sensitive, so you can just write the name the way you want to
 - if you have multiple friends with the same name, it could happen that only 1 friend gets the file, to fix that just remove the .lower() which makes the script case sensitive again
 - Then the script asks you if you want to send an additional message, just press enter to skip if you only want to send the file
+- If you have any problems with your token or nitro plan, the script should work you through it. You can always manually edit the values in /home/you/.config/dcsf/.env if you want to.
 
-## Btw
+## How do I get my discord token?
 
-- I also added a bash script, so if you put both of those files inside of /usr/bin/ and allow it to execute, then you can have an universal command in linux :>
+The easiest way is to use the developer tools in your browser. This is for firefox, but it should be similar in chrome:
+
+- Open discord in your browser and log in.
+- Open the developer tools (F12 or Ctrl + Shift + I)
+- Go to the "Storage" tab
+- Click on "Local Storage"
+- At the top is a filter or a search bar, type in "token" and press enter.
+- If nothing comes up, you need to click on the "Responsive Design mode" button (the one with the phone and the tablet) and then refresh the page. Ctrl + Shift + M might work too.
+- Then you should receive your discord token.
+- It will be surrounded by 2 double quotes ( " " ), remove those and copy the token. And paste it into the program. Also, never share your token with anyone, it's like your password, but worse.
+- If you don't, you might have to search for a tutorial on how to get your discord token.
 
 ### If there are any questions or bugs, feel free to open a ticket.
 
