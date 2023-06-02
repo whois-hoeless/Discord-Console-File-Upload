@@ -54,6 +54,6 @@ The easiest way is to use the developer tools in your browser. This is for firef
 - It will be surrounded by 2 double quotes ( " " ), remove those and copy the token. And paste it into the program. Also, never share your token with anyone, it's like your password, but worse.
 - If you don't, you might have to search for a tutorial on how to get your discord token.
 
-### If there are any questions or bugs, feel free to open a ticket.
+### If there are any questions or bugs, feel free to open a ticket
 
-## Enjoy!
+## Enjoy

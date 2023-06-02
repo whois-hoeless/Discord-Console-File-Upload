@@ -1,10 +1,7 @@
 # Maintainer: Whois Hoeless <whois@hoeless.com>
 
-pkgname=dcsf
-pkgver() {
-  cd "$srcdir/Discord-Console-File-Upload"
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-}
+pkgname=dcsf-git
+pkgver=r14.97092f3
 pkgrel=1
 pkgdesc="Send attachments / files to DMs with messages in Discord using the dcsf command in your command line. (dcsf = discord send file)"
 arch=('any')
