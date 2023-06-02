@@ -11,10 +11,10 @@ depends=('python>=3.9' 'git')
 
 source=("git+https://github.com/whois-hoeless/Discord-Console-File-Upload")
 
+sha256sums=('SKIP')
 package() {
-    cd "$srcdir"
+    cd "$srcdir/Discord-Console-File-Upload"
     install -Dm755 dcsf "$pkgdir/usr/bin/dcsf"
     cd "$srcdir/Discord-Console-File-Upload"
     pip install -r requirements.txt
 }
-sha256sums=('SKIP')
