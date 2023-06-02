@@ -14,7 +14,7 @@ source=("git+https://github.com/whois-hoeless/Discord-Console-File-Upload")
 package() {
     cd "$srcdir"
     install -Dm755 dcsf "$pkgdir/usr/bin/dcsf"
-    install -Dm644 .env "/home/$USER/.config/dcsf/.env"
     cd "$srcdir/Discord-Console-File-Upload"
     pip install -r requirements.txt
 }
+sha256sums=('SKIP')
